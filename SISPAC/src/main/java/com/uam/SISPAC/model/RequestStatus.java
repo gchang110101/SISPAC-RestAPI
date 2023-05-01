@@ -1,5 +1,5 @@
 package com.uam.SISPAC.model;
 
-public class RequestStatus {
-    private ERequestStatus requestStatus;
+public enum RequestStatus {
+    PENDING, CONFIRMED, DENIED
 }

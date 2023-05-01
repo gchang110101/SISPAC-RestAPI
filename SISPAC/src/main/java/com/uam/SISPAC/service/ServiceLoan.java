@@ -19,7 +19,7 @@ public class ServiceLoan implements IServiceLoan{
         repo.save(loan);
     }
     @Override
-    public void loanDelete(Long id) {
+    public void loanDelete(String id) {
         repo.deleteById(id);
     }
     @Override

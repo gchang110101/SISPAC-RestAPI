@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface IRepositoryLoan extends JpaRepository<Loan, Long> {
+public interface IRepositoryLoan extends JpaRepository<Loan, String> {
 
 }

@@ -5,7 +5,6 @@ import com.uam.SISPAC.model.Loan;
 import com.uam.SISPAC.service.IServiceLoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,15 +25,15 @@ public class ControllerLoan {
     public void loanCreate(@RequestBody Loan loan) {
         serviceLoan.loanCreate(loan);
     }
-    @PutMapping("/update")
+    @PutMapping(value = "/update")
     public void loanUpdate(@RequestBody Loan loan) throws Exception {
         if (loan.getId() == null) {
             throw new Exception("Por favor, envía id");
         }
         serviceLoan.loanCreate(loan);
     }
-    @DeleteMapping("/delete/{id}")
-    public void loanDelete(@PathVariable Long id) {
+    @DeleteMapping(value = "/delete/{id}")
+    public void loanDelete(@PathVariable String id) {
         serviceLoan.loanDelete(id);
     }
 }

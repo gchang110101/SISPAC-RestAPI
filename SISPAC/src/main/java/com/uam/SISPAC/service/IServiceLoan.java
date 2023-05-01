@@ -10,7 +10,7 @@ public interface IServiceLoan {
 
     public void loanCreate(Loan loan);
 
-    public void loanDelete(Long id);
+    public void loanDelete(String id);
 
     public List<Loan> checkLoans();
 
