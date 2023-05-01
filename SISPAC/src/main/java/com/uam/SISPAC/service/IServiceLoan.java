@@ -9,7 +9,6 @@ import java.util.List;
 public interface IServiceLoan {
 
     public void loanCreate(Loan loan);
-    public void loanUpdate(Long id, Loan loan);
 
     public void loanDelete(Long id);
 

@@ -19,12 +19,6 @@ public class ServiceLoan implements IServiceLoan{
         repo.save(loan);
     }
     @Override
-    public void loanUpdate(Long id, Loan loan) {
-        if (repo.existsById(id)) {
-            repo.save(loan);
-        }
-    }
-    @Override
     public void loanDelete(Long id) {
         repo.deleteById(id);
     }
