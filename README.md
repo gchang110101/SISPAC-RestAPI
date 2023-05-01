@@ -1,7 +1,7 @@
 # SISPAC
 Sistema Pablo Antonio Cuadra
 
-#Integrantes
+# Integrantes
 - Ernesto Carlos Alaniz
 - Gabriel David Chang
 - Marcos Ulises Sánchez
