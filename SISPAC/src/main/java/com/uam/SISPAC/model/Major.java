@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +14,16 @@ import java.util.List;
 @Entity(name = "Major")
 public class Major {
     @Id
-    private Long id;
+    private String id;
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_major_facultyID"))
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Faculty faculty;
 
     @OneToMany(mappedBy = "major", cascade = CascadeType.ALL
             ,fetch = FetchType.LAZY)
-    private List<Student> facultyTeachers;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Student> majorStudents;
 }
