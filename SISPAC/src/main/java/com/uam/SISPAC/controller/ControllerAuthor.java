@@ -4,6 +4,8 @@ import com.uam.SISPAC.model.Author;
 import com.uam.SISPAC.service.IServiceAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +17,10 @@ public class ControllerAuthor {
     @Autowired
     public IServiceAuthor serviceAuthor;
     @GetMapping("/all")
-    public List<Author> getAll() {
-        return serviceAuthor.getAll();
+    public ResponseEntity<List<Author>> getAll() {
+        List<Author> authorList = serviceAuthor.getAll();
+        //return serviceAuthor.getAll();
+        return new ResponseEntity<>(authorList,HttpStatus.OK);
     }
     @PostMapping("/save")
     public Author saveAuthor(@RequestBody Author author) {
@@ -33,7 +37,5 @@ public class ControllerAuthor {
     public void deleteLibro(@PathVariable String id) {
         serviceAuthor.deleteById(id);
     }
-
-
 }
 
