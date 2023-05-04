@@ -23,4 +23,8 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author author;
+
+    @ManyToMany
+    private List<RequestLoan> requestLoans;
+
 }

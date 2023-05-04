@@ -8,7 +8,6 @@ public class BookDto {
     private String id;
     private String MFN;
     private String title;
-
     @JsonProperty("book")
     private String idBook;
 }
