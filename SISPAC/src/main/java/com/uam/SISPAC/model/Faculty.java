@@ -1,5 +1,7 @@
 package com.uam.SISPAC.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,12 +19,16 @@ public class Faculty {
     private String name;
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL
-            ,fetch = FetchType.LAZY)
+            ,fetch = FetchType.EAGER)
+    @JsonManagedReference
+    //@JsonIgnore
     private List<Major> facultyMajors;
 
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL
-            ,fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+            ,fetch = FetchType.EAGER)
+    @JsonManagedReference
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonIgnore
     private List<Teacher> facultyTeachers;
 }
