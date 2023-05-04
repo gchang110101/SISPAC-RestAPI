@@ -19,15 +19,16 @@ public class Faculty {
     private String name;
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL
-            ,fetch = FetchType.EAGER)
-    @JsonManagedReference
+            ,fetch = FetchType.LAZY)
+    //@JsonManagedReference
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     //@JsonIgnore
     private List<Major> facultyMajors;
 
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL
-            ,fetch = FetchType.EAGER)
-    @JsonManagedReference
+            ,fetch = FetchType.LAZY)
+    //@JsonManagedReference
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     //@JsonIgnore
     private List<Teacher> facultyTeachers;

@@ -23,11 +23,13 @@ public class Major {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_major_facultyID"))
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     private Faculty faculty;
 
     @OneToMany(mappedBy = "major", cascade = CascadeType.ALL
             ,fetch = FetchType.LAZY)
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private List<Student> majorStudents;
 }

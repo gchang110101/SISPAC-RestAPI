@@ -26,8 +26,6 @@ public class ServiceMajor implements IServiceMajor {
         insertMajor.setId(major.getId());
         insertMajor.setName(major.getName());
 
-        //Faculty insertFaculty = repo2.findById(major.getId()).get();
-
         Faculty insertFaculty = repo2.findById(major.getFaculty().getId()).get();
 
         insertMajor.setFaculty(insertFaculty);

@@ -18,7 +18,7 @@ public class Department {
     private String name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL
-            ,fetch = FetchType.EAGER)
+            ,fetch = FetchType.LAZY)
     //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Employee> departmentEmployees;
 }
