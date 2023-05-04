@@ -3,7 +3,6 @@ package com.uam.SISPAC.service;
 import com.uam.SISPAC.model.Author;
 import com.uam.SISPAC.model.Book;
 import com.uam.SISPAC.repository.IRepositoryAuthor;
-import com.uam.SISPAC.repository.IRepositoryBook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -31,11 +30,15 @@ public class ServiceAuthor implements IServiceAuthor {
         Author author1 = new Author();
         author1.setName(author.getName());
         author1.setBooks(author.getBooks());
+        author1.setId(author.getId());
 
         for(Book book : books){
             Book l = new Book();
             l.setAuthor(author1);
             l.setTitle(book.getTitle());
+            l.setISBN(book.getISBN());
+            l.setExistence(book.getExistence());
+            l.setMFN(book.getMFN());
             datos.add(l);
 
         }
