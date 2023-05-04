@@ -1,8 +1,6 @@
 package com.uam.SISPAC.model;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -13,4 +11,5 @@ public class RequestLoan {
 
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
+
 }

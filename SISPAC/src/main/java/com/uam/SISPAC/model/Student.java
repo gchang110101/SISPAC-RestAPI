@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +16,10 @@ public class Student extends SystemUser {
     @Column(unique = true)
     private String cardNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "majorId",
             referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_student_majorID"))
+    @JsonIgnore
     private Major major;
 }
