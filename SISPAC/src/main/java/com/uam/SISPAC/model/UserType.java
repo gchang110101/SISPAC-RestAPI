@@ -1,7 +1,7 @@
 package com.uam.SISPAC.model;
 
 public enum UserType {
-    USER,
+    STUDENT,
     TEACHER,
     STAFF,
     LIBRARIAN
