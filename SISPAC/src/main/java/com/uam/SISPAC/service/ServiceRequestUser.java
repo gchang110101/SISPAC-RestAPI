@@ -4,12 +4,14 @@ import com.uam.SISPAC.model.RequestLoan;
 import com.uam.SISPAC.model.SystemUser;
 import com.uam.SISPAC.repository.IRepositoryRequestLoan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Component("ServiceRequestUser")
 public class ServiceRequestUser implements IServiceRequestUser{
 
     @Autowired

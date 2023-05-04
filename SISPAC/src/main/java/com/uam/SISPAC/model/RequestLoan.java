@@ -17,9 +17,9 @@ public class RequestLoan {
 
     @ManyToMany
     @JoinTable(
-            name = "reqest_book",
+            name = "book_request",
             joinColumns = @JoinColumn(name = "request_id"),
-            inverseJoinColumns = @JoinColumn(name = "isbn"))
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books;
 
     @ManyToOne

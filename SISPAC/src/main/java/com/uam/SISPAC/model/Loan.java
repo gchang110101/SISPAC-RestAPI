@@ -19,9 +19,6 @@ public class Loan {
     @Column(name = "status")
     private LoanStatus loanStatus;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Book> books;
-
     @ManyToMany
     @JoinTable(
             name = "loan_copy",
