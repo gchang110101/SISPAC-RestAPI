@@ -18,6 +18,9 @@ public class SystemUser {
     @Column(name = "cif", unique = true)
     private String cif;
 
+    @Column(name = "cardNumber", unique = true, nullable = false)
+    private String cardNumber;
+
     private Boolean status;
     private String names;
     private String lastNames;

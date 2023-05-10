@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Component("ServiceSystemUser")
@@ -15,12 +16,17 @@ public class ServiceSystemUser implements IServiceSystemUser {
     private IRepositorySystemUser repo;
 
     @Override
-    public List<SystemUser> systemUserGetAll() {
+    public List<SystemUser> getAll() {
         return repo.findAll();
     }
 
     @Override
-    public void systemUserCreate(SystemUser systemUser) {
+    public void create(SystemUser systemUser) {
         repo.save(systemUser);
+    }
+
+    @Override
+    public Optional<SystemUser> getOne(String id) {
+        return repo.findById(id);
     }
 }
