@@ -20,6 +20,7 @@ public class SystemUser {
     @Column(name = "cardNumber", unique = true, nullable = false)
     private String cardNumber;
 
+    private String password;
     private Boolean status;
     private String names;
     private String lastNames;
