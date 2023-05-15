@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/systemuser")
@@ -17,18 +18,23 @@ public class ControllerSystemUser {
 
     @GetMapping("/all")
     public List<SystemUser> getAll() {
-        return serviceSystemUser.systemUserGetAll();
+        return serviceSystemUser.getAll();
     }
 
     @PostMapping("/save")
-    public void saveSystemUser(@RequestBody SystemUser systemUser) {
-        serviceSystemUser.systemUserCreate(systemUser);
+    public void save(@RequestBody SystemUser systemUser) {
+        serviceSystemUser.create(systemUser);
     }
 
     @PutMapping("/update")
-    public void updateSystemUser(@RequestBody SystemUser systemUser) throws Exception {
+    public void update(@RequestBody SystemUser systemUser) throws Exception {
         if (systemUser.getId().equals(null))
             throw new Exception("No ID value found");
-        serviceSystemUser.systemUserCreate(systemUser);
+        serviceSystemUser.create(systemUser);
+    }
+
+    @GetMapping("/one/{id}")
+    public Optional<SystemUser> getOne(@PathVariable String id) {
+        return serviceSystemUser.getOne(id);
     }
 }

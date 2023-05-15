@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +18,9 @@ public class SystemUser {
     @Column(name = "cif", unique = true)
     private String cif;
 
+    @Column(name = "cardNumber", unique = true, nullable = false)
+    private String cardNumber;
+
     private Boolean status;
     private String names;
     private String lastNames;
@@ -27,7 +28,4 @@ public class SystemUser {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
-
-    @OneToMany(mappedBy = "systemUser")
-    private List<RequestLoan> requestLoans;
 }

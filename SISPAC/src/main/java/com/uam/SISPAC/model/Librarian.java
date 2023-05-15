@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(foreignKey = @ForeignKey(name = "fk_librarian_user"))
 public class Librarian extends SystemUser {
 
-    @Column(unique = true)
-    private String cardNumber;
-
     @Enumerated(EnumType.STRING)
     private LibrarianRole librarianRole;
 }
