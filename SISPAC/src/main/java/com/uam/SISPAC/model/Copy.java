@@ -21,4 +21,7 @@ public class Copy {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
+
+    @ManyToMany(mappedBy = "copies")
+    List<Loan> loans;
 }

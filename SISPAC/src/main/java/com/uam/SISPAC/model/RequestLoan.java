@@ -1,16 +1,27 @@
 package com.uam.SISPAC.model;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity(name = "RequestLoan")
+@Data
 public class RequestLoan {
     @Id
     private String id;
     private LocalDate date;
-
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
+
+    @ManyToMany
+    @JoinTable(
+            name = "book_request",
+            joinColumns = @JoinColumn(name = "request_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> books;
+
+    @ManyToOne
+    private SystemUser systemUser;
 }

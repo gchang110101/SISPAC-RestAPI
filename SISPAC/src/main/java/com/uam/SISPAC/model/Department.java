@@ -19,6 +19,6 @@ public class Department {
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL
             ,fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private List<Employee> facultyTeachers;
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Employee> departmentEmployees;
 }
