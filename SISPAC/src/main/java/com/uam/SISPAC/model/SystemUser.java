@@ -28,7 +28,4 @@ public class SystemUser {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
-
-    @OneToMany(mappedBy = "systemUser")
-    private List<RequestLoan> requestLoans;
 }
