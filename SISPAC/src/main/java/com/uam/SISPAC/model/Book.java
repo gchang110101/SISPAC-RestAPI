@@ -24,6 +24,11 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author author;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Classification classifications;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Copy> copy;
 }
