@@ -16,13 +16,14 @@ import java.util.List;
 
 public class Book {
     @Id
-    private String ISBM;
+    private String ISBN;
     private String MFN;
     private String title;
+    private Integer existence;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author author;
-    @ManyToMany(mappedBy = "books")
-    private List<RequestLoan> requestLoans;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Classification classifications;
 }
