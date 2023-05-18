@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Book")
-
 public class ControllerBook {
     @Qualifier("ServiceBook")
     @Autowired
@@ -29,8 +28,8 @@ public class ControllerBook {
 
     @PutMapping(value = "/update")
     public Book updateBook(@RequestBody BookDto bookDto) throws Exception {
-        if (bookDto.getId() == null) {
-            throw new Exception("Please, send the Id vallue");
+        if (bookDto.getIdBook() == null) {
+            throw new Exception("Please, send the Id value");
         }
         return service.save(bookDto);
     }
@@ -40,4 +39,18 @@ public class ControllerBook {
         service.deleteById(id);
     }
 
+    @GetMapping("/one/byisbn/{isbn}")
+    public Book getByISBN(@PathVariable String isbn) {
+        return service.getOneByISBN(isbn);
+    }
+
+    @GetMapping("/one/bytitle/{title}")
+    public Book getByTitle(@PathVariable String title) {
+        return service.getOneByTitle(title);
+    }
+
+    @GetMapping("/one/bymfn/{mfn}")
+    public Book getByMFN(@PathVariable String mfn) {
+        return service.getOneByMFN(mfn);
+    }
 }

@@ -13,4 +13,14 @@ public interface IServiceBook {
     public Book save(BookDto bookDto);
 
     public void deleteById(String id);
+
+    public Book getOneByISBN(String isbn);
+
+    public Book getOneByMFN(String mfn);
+
+    public Book getOneByTitle(String title);
+
+    public Book getBookByAuthor(String authorName);
+
+    public Book getBookByClassification(String classificationName);
 }

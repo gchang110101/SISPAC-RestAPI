@@ -41,7 +41,7 @@ public class ControllerSystemUser {
     }
 
     @GetMapping("/login")
-    public LoginResponse getLogin(@Param("names") String names, @Param("password") String password) {
-        return serviceSystemUser.getUser(names, password);
+    public LoginResponse getLogin(@Param("cif") String cif, @Param("password") String password) {
+        return serviceSystemUser.getUser(cif, password);
     }
 }

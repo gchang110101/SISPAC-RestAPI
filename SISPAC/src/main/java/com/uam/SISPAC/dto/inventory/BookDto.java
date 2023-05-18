@@ -5,9 +5,12 @@ import lombok.Data;
 
 @Data
 public class BookDto {
-    private String id;
+    @JsonProperty("isbn")
+    private String idBook;
+
     private String MFN;
     private String title;
-    @JsonProperty("book")
-    private String idBook;
+    private Integer existence;
+    private String authorId;
+    private String classificationId;
 }
