@@ -30,4 +30,12 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Copy> copy;
+
+    //BookDTO constructor
+    public Book(String isbn, String mfn, String title, Integer existence) {
+        this.ISBN = isbn;
+        this.MFN = mfn;
+        this.title = title;
+        this.existence = existence;
+    }
 }

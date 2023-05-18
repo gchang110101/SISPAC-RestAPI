@@ -1,9 +1,11 @@
 package com.uam.SISPAC.controller.humanresources;
 
+import com.uam.SISPAC.dto.humanresources.LoginResponse;
 import com.uam.SISPAC.model.humanresources.SystemUser;
 import com.uam.SISPAC.service.humanresources.IServiceSystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,5 +38,10 @@ public class ControllerSystemUser {
     @GetMapping("/one/{id}")
     public Optional<SystemUser> getOne(@PathVariable String id) {
         return serviceSystemUser.getOne(id);
+    }
+
+    @GetMapping("/login")
+    public LoginResponse getLogin(@Param("cif") String cif, @Param("password") String password) {
+        return serviceSystemUser.getUser(cif, password);
     }
 }
