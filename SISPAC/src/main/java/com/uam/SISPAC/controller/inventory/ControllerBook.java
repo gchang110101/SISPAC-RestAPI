@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Book")
+@CrossOrigin("*")
 public class ControllerBook {
     @Qualifier("ServiceBook")
     @Autowired
@@ -52,5 +53,15 @@ public class ControllerBook {
     @GetMapping("/one/bymfn/{mfn}")
     public Book getByMFN(@PathVariable String mfn) {
         return service.getOneByMFN(mfn);
+    }
+
+    @GetMapping("/some/byauthor/{authorName}")
+    public List<Book> getByAuthorID(@PathVariable String authorName) {
+        return service.getBookByAuthor(authorName);
+    }
+
+    @GetMapping("/some/byclassification/{classificationName}")
+    public List<Book> getByClassificationID(@PathVariable String classificationName) {
+        return service.getBookByClassification(classificationName);
     }
 }

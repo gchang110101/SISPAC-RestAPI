@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/systemuser")
+@CrossOrigin("*")
 public class ControllerSystemUser {
     @Autowired
     @Qualifier("ServiceSystemUser")

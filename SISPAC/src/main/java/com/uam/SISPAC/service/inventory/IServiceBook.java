@@ -20,7 +20,7 @@ public interface IServiceBook {
 
     public Book getOneByTitle(String title);
 
-    public Book getBookByAuthor(String authorName);
+    public List<Book> getBookByAuthor(String authorName);
 
-    public Book getBookByClassification(String classificationName);
+    public List<Book> getBookByClassification(String classificationName);
 }

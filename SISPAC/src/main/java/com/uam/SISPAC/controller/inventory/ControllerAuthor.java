@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/author")
+@CrossOrigin("*")
 public class ControllerAuthor {
     @Qualifier("ServiceAuthor")
     @Autowired

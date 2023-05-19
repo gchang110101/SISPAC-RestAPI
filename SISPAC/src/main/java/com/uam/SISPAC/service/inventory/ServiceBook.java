@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Data
 @Service
@@ -44,11 +45,11 @@ public class ServiceBook implements IServiceBook{
         else if(!repoAuthor.existsById(bookDto.getAuthorId()))
             insertBook.setAuthor(null);
         else
-            insertBook.setClassifications(null);
+            insertBook.setAuthor(repoAuthor.findById(bookDto.getAuthorId()).get());
 
         //attach classification through DTO foreign id parameter (if they exist)
         if(bookDto.getClassificationId() == null)
-            insertBook.setAuthor(null);
+            insertBook.setClassifications(null);
         else if(!repoClassification.existsById(bookDto.getClassificationId()))
             insertBook.setClassifications(null);
         else
@@ -99,13 +100,31 @@ public class ServiceBook implements IServiceBook{
     }
 
     @Override
-    public Book getBookByAuthor(String authorName) {
-        return null;
+    public List<Book> getBookByAuthor(String authorName) {
+        List<Book> requestBooks = new ArrayList<>();
+        requestBooks = repoBook.getBookByAuthorId(authorName);
+
+        List<Book> responseBooks = new ArrayList<>();
+        //System.out.println(requestBooks);
+        //System.out.println(responseBooks);
+
+        //if the list is empty (null), from not assigning anything from the query (repoBook method)
+        if(!(requestBooks.isEmpty()))
+            responseBooks = requestBooks;
+
+        return responseBooks;
     }
 
     @Override
-    public Book getBookByClassification(String classificationName) {
-        return null;
+    public List<Book> getBookByClassification(String classificationName) {
+        List<Book> requestBooks = repoBook.getBookByClassificationId(classificationName);
+        List<Book> responseBooks = new ArrayList<>();
+
+        //is the list is empty (null), from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
+            responseBooks = requestBooks;
+
+        return responseBooks;
     }
 }
 

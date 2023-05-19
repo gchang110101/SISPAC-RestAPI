@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IRepositoryBook extends JpaRepository<Book, String> {
     @Query("select b from Book b where b.ISBN = :isbn")
@@ -17,9 +19,9 @@ public interface IRepositoryBook extends JpaRepository<Book, String> {
     @Query("select b from Book b where b.title = :title")
     public Book getBookByTitle(@Param("title") String title);
 
-    //@Query("select b from Book b where b = : title")
-    //public Book getBookByAuthor();
+    @Query("select b from Book b where b.author.name = :authorName")
+    public List<Book> getBookByAuthorId(@Param("authorName") String authorName);
 
-    //@Query("select b from Book b where b.title = : title")
-    //public Book getBookByClassifiction();
+    @Query("select b from Book b where b.classifications.name = :classificationName")
+    public List<Book> getBookByClassificationId(@Param("classificationName") String classificationName);
 }
