@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "SystemUser")
+@Entity
+@Table(name = "SystemUser", schema = "HumanResources")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class SystemUser {
     @Id

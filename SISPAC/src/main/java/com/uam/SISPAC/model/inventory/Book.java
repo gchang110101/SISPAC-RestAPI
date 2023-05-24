@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name = "Book", schema = "Inventory")
 public class Book {
     @Id
     private String ISBN;

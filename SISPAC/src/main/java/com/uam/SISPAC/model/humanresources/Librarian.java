@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Librarian")
+@Entity
+@Table(name = "Librarian", schema = "HumanResources")
 @PrimaryKeyJoinColumn(foreignKey = @ForeignKey(name = "fk_librarian_user"))
 public class Librarian extends SystemUser {
 

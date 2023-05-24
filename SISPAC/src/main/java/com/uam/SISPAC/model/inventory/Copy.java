@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Copy", schema = "Inventory")
 public class Copy {
     @Id
     private String id;

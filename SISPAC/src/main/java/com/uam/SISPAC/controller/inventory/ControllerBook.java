@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Book")
+@RequestMapping("/book")
 @CrossOrigin("*")
 public class ControllerBook {
     @Qualifier("ServiceBook")

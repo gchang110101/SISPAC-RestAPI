@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name = "Author", schema = "Inventory")
 public class Author {
     @Id
     private String id;

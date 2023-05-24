@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity(name = "RequestLoan")
 @Data
+@Table(name = "RequestLoan", schema = "Loans")
 public class RequestLoan {
     @Id
     private String id;
@@ -20,10 +21,12 @@ public class RequestLoan {
     @ManyToMany
     @JoinTable(
             name = "book_request",
+            schema = "Loans",
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<Book> books;
 
     @ManyToOne
     private SystemUser systemUser;
+
 }

@@ -45,4 +45,5 @@ public class ControllerSystemUser {
     public LoginResponse getLogin(@Param("cif") String cif, @Param("password") String password) {
         return serviceSystemUser.getUser(cif, password);
     }
+
 }

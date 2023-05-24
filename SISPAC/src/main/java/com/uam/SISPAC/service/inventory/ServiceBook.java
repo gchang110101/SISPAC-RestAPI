@@ -101,15 +101,11 @@ public class ServiceBook implements IServiceBook{
 
     @Override
     public List<Book> getBookByAuthor(String authorName) {
-        List<Book> requestBooks = new ArrayList<>();
-        requestBooks = repoBook.getBookByAuthorId(authorName);
-
+        List<Book> requestBooks = repoBook.getBookByAuthorId(authorName);
         List<Book> responseBooks = new ArrayList<>();
-        //System.out.println(requestBooks);
-        //System.out.println(responseBooks);
 
-        //if the list is empty (null), from not assigning anything from the query (repoBook method)
-        if(!(requestBooks.isEmpty()))
+        //if the list is null, from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
             responseBooks = requestBooks;
 
         return responseBooks;
@@ -120,7 +116,7 @@ public class ServiceBook implements IServiceBook{
         List<Book> requestBooks = repoBook.getBookByClassificationId(classificationName);
         List<Book> responseBooks = new ArrayList<>();
 
-        //is the list is empty (null), from not assigning anything from the query (repoBook method)
+        //is the list is null, from not assigning anything from the query (repoBook method)
         if(requestBooks != null)
             responseBooks = requestBooks;
 

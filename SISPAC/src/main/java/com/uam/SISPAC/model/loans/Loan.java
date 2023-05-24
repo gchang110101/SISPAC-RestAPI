@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Entity(name = "Loan")
+@Entity
+@Table(name = "Loan", schema = "Loans")
 public class Loan {
     private LocalDate dateIssued;
     private LocalDate dateReturned;
@@ -23,6 +24,7 @@ public class Loan {
     @ManyToMany
     @JoinTable(
             name = "loan_copy",
+            schema = "Loans",
             joinColumns = @JoinColumn(name = "loan_id"),
             inverseJoinColumns = @JoinColumn(name = "copy_id"))
     List<Copy> copies;
