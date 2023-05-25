@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("192.*.*.*")
 @RequestMapping("/systemuser")
 public class ControllerSystemUser {
     @Autowired
@@ -40,7 +41,7 @@ public class ControllerSystemUser {
         return serviceSystemUser.getOne(id);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public LoginResponse getLogin(@Param("cif") String cif, @Param("password") String password) {
         return serviceSystemUser.getUser(cif, password);
     }
