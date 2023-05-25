@@ -27,6 +27,9 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     private Classification classifications;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Publisher publisher;
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Copy> copy;
