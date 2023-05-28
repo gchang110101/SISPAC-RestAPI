@@ -26,7 +26,7 @@ public class ServiceLoan implements IServiceLoan{
         Loan loan = new Loan(
                 loanDto.getDateIssued(),
                 loanDto.getDateReturned(),
-                loanDto.getDateAccepted(),
+                loanDto.getDateCreated(),
                 loanDto.getId(),
                 loanDto.getLoanStatus()
         );

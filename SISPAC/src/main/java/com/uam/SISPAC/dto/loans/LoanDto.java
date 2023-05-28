@@ -12,7 +12,7 @@ import java.util.List;
 public class LoanDto {
     private LocalDate dateIssued;
     private LocalDate dateReturned;
-    private LocalDate dateAccepted;
+    private LocalDate dateCreated;
     private String id;
     private LoanStatus loanStatus;
     private String username;

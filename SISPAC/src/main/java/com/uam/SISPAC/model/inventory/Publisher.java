@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(schema = "inventory")
 public class Publisher {
     @Id
     private String id;

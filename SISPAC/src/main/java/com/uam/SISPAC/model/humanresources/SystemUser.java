@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "SystemUser")
+@Table(schema = "humanresources")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class SystemUser {
     @Id

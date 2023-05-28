@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(schema = "inventory")
 public class Book {
     @Id
     private String ISBN;
@@ -27,6 +27,7 @@ public class Book {
      */
     @ManyToMany
     @JoinTable(
+            schema = "inventory",
             name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))

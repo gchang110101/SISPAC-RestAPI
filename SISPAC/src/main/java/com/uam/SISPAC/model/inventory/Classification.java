@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Table(schema = "inventory")
 public class Classification {
     @Id
     private String id;

@@ -3,17 +3,22 @@ package com.uam.SISPAC.model.loans;
 import com.uam.SISPAC.model.humanresources.SystemUser;
 import com.uam.SISPAC.model.inventory.Copy;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @Entity(name = "Loan")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(schema = "loans")
 public class Loan {
     private LocalDate dateIssued;
     private LocalDate dateReturned;
-    private LocalDate dateAccepted;
+    private LocalDate dateCreated;
     @Id
     private String id;
     @Enumerated(EnumType.STRING)
@@ -22,6 +27,7 @@ public class Loan {
 
     @ManyToMany
     @JoinTable(
+            schema = "loans",
             name = "loan_copy",
             joinColumns = @JoinColumn(name = "loan_id"),
             inverseJoinColumns = @JoinColumn(name = "copy_id"))
@@ -30,10 +36,10 @@ public class Loan {
     @ManyToOne(fetch = FetchType.LAZY)
     private SystemUser systemUser;
 
-    public Loan(LocalDate dateIssued, LocalDate dateReturned, LocalDate dateAccepted, String id, LoanStatus loanStatus) {
+    public Loan(LocalDate dateIssued, LocalDate dateReturned, LocalDate dateCreated, String id, LoanStatus loanStatus) {
         this.dateIssued = dateIssued;
         this.dateReturned = dateReturned;
-        this.dateAccepted = dateAccepted;
+        this.dateCreated = dateCreated;
         this.id = id;
         this.loanStatus = loanStatus;
     }
