@@ -30,8 +30,8 @@ public class ServiceSystemUser implements IServiceSystemUser {
     }
 
     @Override
-    public LoginResponse getUser(String names, String password) {
-        SystemUser u = repo.getSystemUserByCif(names, password);
+    public LoginResponse getUser(String name, String password) {
+        SystemUser u = repo.getSystemUserByCif(name, password);
         LoginResponse lr = new LoginResponse(false, "NOT CONNECTED");
 
         if(u != null) {

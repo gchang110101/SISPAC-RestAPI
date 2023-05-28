@@ -7,10 +7,12 @@ import com.uam.SISPAC.repository.inventory.IRepositoryAuthor;
 import com.uam.SISPAC.repository.inventory.IRepositoryBook;
 import com.uam.SISPAC.repository.inventory.IRepositoryClassification;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Data
 @Service
@@ -24,11 +26,18 @@ public class ServiceBook implements IServiceBook{
     @Autowired
     private IRepositoryClassification repoClassification;
 
+
+
+
+
+
+
     @Override
     public List<Book> getAll() {
         return repoBook.findAll();
     }
 
+    @SneakyThrows
     @Override
     public Book save(BookDto bookDto) {
         Book insertBook = new Book(
@@ -38,24 +47,58 @@ public class ServiceBook implements IServiceBook{
                 bookDto.getExistence()
         );
 
+        List<Author> authors = new ArrayList<>();
+
+        for (String id: bookDto.getAuthorsId()) {
+            if (!repoAuthor.existsById(id)) {
+                throw new Exception("Uno o muchos de los autores ingresados no son válidos");
+            }
+        }
+
+        List<Author> authorList = new ArrayList<>();
+
+        for (String id : bookDto.getAuthorsId()) {
+            authorList.add(repoAuthor.findById(id).get());
+        }
+
+        insertBook.setAuthors(authorList);
+
+
+        if (!repoClassification.existsById(bookDto.getClassificationId())) {
+            throw new Exception("La classification ingresada no es valida");
+        }
+
+        insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        /*
+
         //attach author through DTO foreign id parameter (if they exist)
-        if(bookDto.getAuthorId() == null)
-            insertBook.setAuthor(null);
-        else if(!repoAuthor.existsById(bookDto.getAuthorId()))
-            insertBook.setAuthor(null);
+        if(bookDto.getAuthorsId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoAuthor.existsById(bookDto.getAuthorsId().toString()))
+            insertBook.setAuthors(null);
         else
-            insertBook.setClassifications(null);
+            insertBook.setClassification(null);
 
         //attach classification through DTO foreign id parameter (if they exist)
         if(bookDto.getClassificationId() == null)
-            insertBook.setAuthor(null);
+            insertBook.setAuthors(null);
         else if(!repoClassification.existsById(bookDto.getClassificationId()))
-            insertBook.setClassifications(null);
+            insertBook.setClassification(null);
         else
-            insertBook.setClassifications(repoClassification.findById(bookDto.getClassificationId()).get());
+            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        /*
+        if(bookDto.getPublisherId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoClassification.existsById(bookDto.getClassificationId()))
+            insertBook.setClassification(null);
+        else
+            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
 
         //copy null for now
         insertBook.setCopy(null);
+        */
 
         return repoBook.save(insertBook);
     }

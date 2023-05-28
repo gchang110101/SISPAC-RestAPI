@@ -6,21 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Classification {
+public class Publisher {
     @Id
     private String id;
     private String name;
-    @OneToMany(mappedBy = "classification",cascade = CascadeType.ALL
-            ,fetch = FetchType.LAZY)
 
-    private List<Book> books;
-
-    public Classification(String id, String name) {
+    public Publisher(String id, String name) {
         this.id = id;
         this.name = name;
     }
+
+    @OneToMany(mappedBy = "publisher")
+    private List<Book> books;
+
 }

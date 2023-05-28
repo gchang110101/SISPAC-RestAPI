@@ -1,9 +1,12 @@
 package com.uam.SISPAC.model.humanresources;
 
+import com.uam.SISPAC.model.loans.Loan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +28,10 @@ public class SystemUser {
     private String names;
     private String lastNames;
     private String phoneNumber;
+
+
+    @OneToMany(mappedBy = "systemUser")
+    private List<Loan> loans;
 
     @Enumerated(EnumType.STRING)
     private UserType userType;

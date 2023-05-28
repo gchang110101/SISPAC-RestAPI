@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.loans;
 
+import com.uam.SISPAC.model.humanresources.SystemUser;
 import com.uam.SISPAC.model.inventory.Copy;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,7 +14,6 @@ public class Loan {
     private LocalDate dateIssued;
     private LocalDate dateReturned;
     private LocalDate dateAccepted;
-    private Double delay;
     @Id
     private String id;
     @Enumerated(EnumType.STRING)
@@ -27,4 +27,14 @@ public class Loan {
             inverseJoinColumns = @JoinColumn(name = "copy_id"))
     List<Copy> copies;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SystemUser systemUser;
+
+    public Loan(LocalDate dateIssued, LocalDate dateReturned, LocalDate dateAccepted, String id, LoanStatus loanStatus) {
+        this.dateIssued = dateIssued;
+        this.dateReturned = dateReturned;
+        this.dateAccepted = dateAccepted;
+        this.id = id;
+        this.loanStatus = loanStatus;
+    }
 }

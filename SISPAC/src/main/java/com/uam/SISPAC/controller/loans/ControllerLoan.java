@@ -1,6 +1,7 @@
 package com.uam.SISPAC.controller.loans;
 
 
+import com.uam.SISPAC.dto.loans.LoanDto;
 import com.uam.SISPAC.model.loans.Loan;
 import com.uam.SISPAC.service.loans.IServiceLoan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,11 @@ public class ControllerLoan {
         return serviceLoan.checkLoans();
     }
     @PostMapping("/save")
-    public void loanCreate(@RequestBody Loan loan) {
+    public void loanCreate(@RequestBody LoanDto loan) {
         serviceLoan.loanCreate(loan);
     }
     @PutMapping(value = "/update")
-    public void loanUpdate(@RequestBody Loan loan) throws Exception {
+    public void loanUpdate(@RequestBody LoanDto loan) throws Exception {
         if (loan.getId() == null) {
             throw new Exception("Por favor, envía id");
         }

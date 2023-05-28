@@ -20,12 +20,20 @@ public class Book {
     private String title;
     private Integer existence;
 
+    /*
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author author;
+     */
+    @ManyToMany
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    List<Author> authors;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Classification classifications;
+    private Classification classification;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
@@ -38,4 +46,6 @@ public class Book {
         this.title = title;
         this.existence = existence;
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Publisher publisher;
 }

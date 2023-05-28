@@ -16,9 +16,17 @@ public class Author {
     @Id
     private String id;
     private String name;
-    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL
-            ,fetch = FetchType.LAZY)
 
-    private List <Book> books;
+    public Author(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    /*@OneToMany(mappedBy = "author",cascade = CascadeType.ALL
+                ,fetch = FetchType.LAZY)/
+
+         */
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
 
 }

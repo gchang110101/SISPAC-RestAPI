@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @RestController
 @CrossOrigin("192.*.*.*")
 @RequestMapping("/systemuser")
@@ -41,7 +43,7 @@ public class ControllerSystemUser {
         return serviceSystemUser.getOne(id);
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public LoginResponse getLogin(@Param("cif") String cif, @Param("password") String password) {
         return serviceSystemUser.getUser(cif, password);
     }
