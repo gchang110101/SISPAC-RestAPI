@@ -1,6 +1,7 @@
 package com.uam.SISPAC.service.humanresources;
 
 import com.uam.SISPAC.dto.humanresources.LoginResponse;
+import com.uam.SISPAC.dto.humanresources.SystemUserDto;
 import com.uam.SISPAC.model.humanresources.SystemUser;
 import com.uam.SISPAC.repository.humanresources.IRepositorySystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,18 @@ public class ServiceSystemUser implements IServiceSystemUser {
         return repo.findAll();
     }
     @Override
-    public void create(SystemUser systemUser) {
+    public void create(SystemUserDto systemUserDto) {
+        SystemUser systemUser = new SystemUser(
+                systemUserDto.getId(),
+                systemUserDto.getCif(),
+                systemUserDto.getCardNumber(),
+                systemUserDto.getPassword(),
+                systemUserDto.getStatus(),
+                systemUserDto.getNames(),
+                systemUserDto.getLastNames(),
+                systemUserDto.getPhoneNumber(),
+                systemUserDto.getUserType()
+        );
         repo.save(systemUser);
     }
     @Override

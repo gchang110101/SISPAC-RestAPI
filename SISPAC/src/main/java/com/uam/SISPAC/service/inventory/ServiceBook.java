@@ -6,6 +6,7 @@ import com.uam.SISPAC.model.inventory.Book;
 import com.uam.SISPAC.repository.inventory.IRepositoryAuthor;
 import com.uam.SISPAC.repository.inventory.IRepositoryBook;
 import com.uam.SISPAC.repository.inventory.IRepositoryClassification;
+import com.uam.SISPAC.repository.inventory.IRepositoryPublisher;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,8 @@ public class ServiceBook implements IServiceBook{
     @Autowired
     private IRepositoryClassification repoClassification;
 
-
-
-
-
+    @Autowired
+    private IRepositoryPublisher repositoryPublisher;
 
 
     @Override
@@ -69,6 +68,12 @@ public class ServiceBook implements IServiceBook{
         }
 
         insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        if (!repositoryPublisher.existsById(bookDto.getPublisherId())) {
+            throw new Exception("El editorial ingresado no es valido");
+        }
+
+        insertBook.setPublisher(repositoryPublisher.findById(bookDto.getPublisherId()).get());
 
         /*
 

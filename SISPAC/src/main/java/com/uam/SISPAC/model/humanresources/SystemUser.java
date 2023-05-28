@@ -30,6 +30,17 @@ public class SystemUser {
     private String lastNames;
     private String phoneNumber;
 
+    public SystemUser(String id, String cif, String cardNumber, String password, Boolean status, String names, String lastNames, String phoneNumber, UserType userType) {
+        this.id = id;
+        this.cif = cif;
+        this.cardNumber = cardNumber;
+        this.password = password;
+        this.status = status;
+        this.names = names;
+        this.lastNames = lastNames;
+        this.phoneNumber = phoneNumber;
+        this.userType = userType;
+    }
 
     @OneToMany(mappedBy = "systemUser")
     private List<Loan> loans;
