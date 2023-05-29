@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.humanresources;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.uam.SISPAC.model.loans.Loan;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -42,6 +43,7 @@ public class SystemUser {
         this.userType = userType;
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "systemUser")
     private List<Loan> loans;
 

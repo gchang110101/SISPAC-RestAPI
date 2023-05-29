@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Author {
                 ,fetch = FetchType.LAZY)/
 
          */
+    @JsonIgnore
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
 

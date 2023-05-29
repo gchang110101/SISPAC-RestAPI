@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Publisher {
     }
 
     @OneToMany(mappedBy = "publisher")
+    @JsonIgnore
     private List<Book> books;
 
 }

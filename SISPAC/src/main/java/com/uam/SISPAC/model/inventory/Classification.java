@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class Classification {
     private String name;
     @OneToMany(mappedBy = "classification",cascade = CascadeType.ALL
             ,fetch = FetchType.LAZY)
-
+    @JsonIgnore
     private List<Book> books;
 
     public Classification(String id, String name) {

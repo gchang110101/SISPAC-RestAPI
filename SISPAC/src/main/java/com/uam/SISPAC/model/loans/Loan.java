@@ -1,5 +1,7 @@
 package com.uam.SISPAC.model.loans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uam.SISPAC.model.humanresources.SystemUser;
 import com.uam.SISPAC.model.inventory.Copy;
 import jakarta.persistence.*;
@@ -26,6 +28,7 @@ public class Loan {
     private LoanStatus loanStatus;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             schema = "loans",
             name = "loan_copy",
@@ -34,6 +37,7 @@ public class Loan {
     List<Copy> copies;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private SystemUser systemUser;
 
     public Loan(LocalDate dateIssued, LocalDate dateReturned, LocalDate dateCreated, String id, LoanStatus loanStatus) {
