@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/loan")
+@CrossOrigin("192.*.*.*")
 public class ControllerLoan {
 
     @Qualifier("ServiceLoan")

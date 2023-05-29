@@ -17,7 +17,6 @@ import java.util.Optional;
 @RestController
 @CrossOrigin("192.*.*.*")
 @RequestMapping("/systemuser")
-@CrossOrigin("*")
 public class ControllerSystemUser {
     @Autowired
     @Qualifier("ServiceSystemUser")
