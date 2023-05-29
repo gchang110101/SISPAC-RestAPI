@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/copy")
+@CrossOrigin("192.*.*.*")
 public class ControllerCopy {
 
     @Qualifier("ServiceCopy")

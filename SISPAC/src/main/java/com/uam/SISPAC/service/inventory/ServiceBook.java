@@ -35,6 +35,7 @@ public class ServiceBook implements IServiceBook{
     public List<Book> getAll() {
         return repoBook.findAll();
     }
+
     @SneakyThrows
     @Override
     public Book save(BookDto bookDto) {
@@ -73,6 +74,36 @@ public class ServiceBook implements IServiceBook{
         }
 
         insertBook.setPublisher(repositoryPublisher.findById(bookDto.getPublisherId()).get());
+
+        /*
+
+        //attach author through DTO foreign id parameter (if they exist)
+        if(bookDto.getAuthorsId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoAuthor.existsById(bookDto.getAuthorsId().toString()))
+            insertBook.setAuthors(null);
+        else
+            insertBook.setClassification(null);
+
+        //attach classification through DTO foreign id parameter (if they exist)
+        if(bookDto.getClassificationId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoClassification.existsById(bookDto.getClassificationId()))
+            insertBook.setClassification(null);
+        else
+            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        /*
+        if(bookDto.getPublisherId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoClassification.existsById(bookDto.getClassificationId()))
+            insertBook.setClassification(null);
+        else
+            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        //copy null for now
+        insertBook.setCopy(null);
+        */
 
         return repoBook.save(insertBook);
     }
@@ -116,13 +147,39 @@ public class ServiceBook implements IServiceBook{
     }
 
     @Override
-    public Book getBookByAuthor(String authorName) {
-        return null;
+    public List<Book> getManyByAuthor(String authorName) {
+        List<Book> requestBooks = repoBook.getBooksByAuthor(authorName);
+        List<Book> responseBooks = new ArrayList<>();
+
+        //is the list is null, from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
+            responseBooks = requestBooks;
+
+        return responseBooks;
     }
 
     @Override
-    public Book getBookByClassification(String classificationName) {
-        return null;
+    public List<Book> getManyByClassification(String classificationName) {
+        List<Book> requestBooks = repoBook.getBookByClassification(classificationName);
+        List<Book> responseBooks = new ArrayList<>();
+
+        //is the list is null, from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
+            responseBooks = requestBooks;
+
+        return responseBooks;
+    }
+
+    @Override
+    public List<Book> getManyByPublisher(String publisherName) {
+        List<Book> requestBooks = repoBook.getBookByPublisher(publisherName);
+        List<Book> responseBooks = new ArrayList<>();
+
+        //is the list is null, from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
+            responseBooks = requestBooks;
+
+        return responseBooks;
     }
 }
 

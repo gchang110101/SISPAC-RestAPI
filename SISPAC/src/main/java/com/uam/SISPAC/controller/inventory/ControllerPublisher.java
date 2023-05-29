@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/publisher")
+@CrossOrigin("192.*.*.*")
 public class ControllerPublisher {
 
     @Qualifier("ServicePublisher")
