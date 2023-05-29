@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/book")
-@CrossOrigin("*")
+@RequestMapping("/Book")
+@CrossOrigin("192.*.*.*")
 public class ControllerBook {
     @Qualifier("ServiceBook")
     @Autowired
@@ -55,13 +55,18 @@ public class ControllerBook {
         return service.getOneByMFN(mfn);
     }
 
-    @GetMapping("/some/byauthor/{authorName}")
-    public List<Book> getByAuthorID(@PathVariable String authorName) {
-        return service.getBookByAuthor(authorName);
+    @GetMapping("/many/byauthor/{authorName}")
+    public List<Book> getByAuthorName(@PathVariable String authorName) {
+        return service.getManyByAuthor(authorName);
     }
 
-    @GetMapping("/some/byclassification/{classificationName}")
-    public List<Book> getByClassificationID(@PathVariable String classificationName) {
-        return service.getBookByClassification(classificationName);
+    @GetMapping("/many/byclassification/{classificationName}")
+    public List<Book> getByClassificationName(@PathVariable String classificationName) {
+        return service.getManyByClassification(classificationName);
+    }
+
+    @GetMapping("/many/bypublisher/{publisherName}")
+    public List<Book> getByPublisherName(@PathVariable String publisherName) {
+        return service.getManyByPublisher(publisherName);
     }
 }

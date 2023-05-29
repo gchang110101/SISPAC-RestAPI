@@ -1,5 +1,6 @@
 package com.uam.SISPAC.controller.inventory;
 
+import com.uam.SISPAC.dto.inventory.AuthorDto;
 import com.uam.SISPAC.model.inventory.Author;
 import com.uam.SISPAC.service.inventory.IServiceAuthor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/author")
-@CrossOrigin("*")
+@CrossOrigin("192.*.*.*")
 public class ControllerAuthor {
     @Qualifier("ServiceAuthor")
     @Autowired
@@ -24,12 +25,12 @@ public class ControllerAuthor {
         return new ResponseEntity<>(authorList,HttpStatus.OK);
     }
     @PostMapping("/save")
-    public Author saveAuthor(@RequestBody Author author) {
+    public Author saveAuthor(@RequestBody AuthorDto author) {
         return serviceAuthor.save(author);
     }
     @PutMapping(value = "/update")
-    public Author updateAuthor(@RequestBody Author author) throws Exception {
-        if (author.getId() == null) {
+    public Author updateAuthor(@RequestBody AuthorDto author) throws Exception {
+        if (author.getAuthorId() == null) {
             throw new Exception("Please, send the Id vallue");
         }
         return serviceAuthor.save(author);

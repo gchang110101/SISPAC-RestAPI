@@ -6,7 +6,9 @@ import com.uam.SISPAC.model.inventory.Book;
 import com.uam.SISPAC.repository.inventory.IRepositoryAuthor;
 import com.uam.SISPAC.repository.inventory.IRepositoryBook;
 import com.uam.SISPAC.repository.inventory.IRepositoryClassification;
+import com.uam.SISPAC.repository.inventory.IRepositoryPublisher;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -25,11 +27,16 @@ public class ServiceBook implements IServiceBook{
     @Autowired
     private IRepositoryClassification repoClassification;
 
+    @Autowired
+    private IRepositoryPublisher repositoryPublisher;
+
+
     @Override
     public List<Book> getAll() {
         return repoBook.findAll();
     }
 
+    @SneakyThrows
     @Override
     public Book save(BookDto bookDto) {
         Book insertBook = new Book(
@@ -39,24 +46,64 @@ public class ServiceBook implements IServiceBook{
                 bookDto.getExistence()
         );
 
+        List<Author> authors = new ArrayList<>();
+
+        for (String id: bookDto.getAuthorsId()) {
+            if (!repoAuthor.existsById(id)) {
+                throw new Exception("Uno o muchos de los autores ingresados no son válidos");
+            }
+        }
+
+        List<Author> authorList = new ArrayList<>();
+
+        for (String id : bookDto.getAuthorsId()) {
+            authorList.add(repoAuthor.findById(id).get());
+        }
+
+        insertBook.setAuthors(authorList);
+
+
+        if (!repoClassification.existsById(bookDto.getClassificationId())) {
+            throw new Exception("La classification ingresada no es valida");
+        }
+
+        insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        if (!repositoryPublisher.existsById(bookDto.getPublisherId())) {
+            throw new Exception("El editorial ingresado no es valido");
+        }
+
+        insertBook.setPublisher(repositoryPublisher.findById(bookDto.getPublisherId()).get());
+
+        /*
+
         //attach author through DTO foreign id parameter (if they exist)
-        if(bookDto.getAuthorId() == null)
-            insertBook.setAuthor(null);
-        else if(!repoAuthor.existsById(bookDto.getAuthorId()))
-            insertBook.setAuthor(null);
+        if(bookDto.getAuthorsId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoAuthor.existsById(bookDto.getAuthorsId().toString()))
+            insertBook.setAuthors(null);
         else
-            insertBook.setAuthor(repoAuthor.findById(bookDto.getAuthorId()).get());
+            insertBook.setClassification(null);
 
         //attach classification through DTO foreign id parameter (if they exist)
         if(bookDto.getClassificationId() == null)
-            insertBook.setClassifications(null);
+            insertBook.setAuthors(null);
         else if(!repoClassification.existsById(bookDto.getClassificationId()))
-            insertBook.setClassifications(null);
+            insertBook.setClassification(null);
         else
-            insertBook.setClassifications(repoClassification.findById(bookDto.getClassificationId()).get());
+            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
+
+        /*
+        if(bookDto.getPublisherId() == null)
+            insertBook.setAuthors(null);
+        else if(!repoClassification.existsById(bookDto.getClassificationId()))
+            insertBook.setClassification(null);
+        else
+            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
 
         //copy null for now
         insertBook.setCopy(null);
+        */
 
         return repoBook.save(insertBook);
     }
@@ -100,11 +147,11 @@ public class ServiceBook implements IServiceBook{
     }
 
     @Override
-    public List<Book> getBookByAuthor(String authorName) {
-        List<Book> requestBooks = repoBook.getBookByAuthorId(authorName);
+    public List<Book> getManyByAuthor(String authorName) {
+        List<Book> requestBooks = repoBook.getBooksByAuthor(authorName);
         List<Book> responseBooks = new ArrayList<>();
 
-        //if the list is null, from not assigning anything from the query (repoBook method)
+        //is the list is null, from not assigning anything from the query (repoBook method)
         if(requestBooks != null)
             responseBooks = requestBooks;
 
@@ -112,8 +159,20 @@ public class ServiceBook implements IServiceBook{
     }
 
     @Override
-    public List<Book> getBookByClassification(String classificationName) {
-        List<Book> requestBooks = repoBook.getBookByClassificationId(classificationName);
+    public List<Book> getManyByClassification(String classificationName) {
+        List<Book> requestBooks = repoBook.getBookByClassification(classificationName);
+        List<Book> responseBooks = new ArrayList<>();
+
+        //is the list is null, from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
+            responseBooks = requestBooks;
+
+        return responseBooks;
+    }
+
+    @Override
+    public List<Book> getManyByPublisher(String publisherName) {
+        List<Book> requestBooks = repoBook.getBookByPublisher(publisherName);
         List<Book> responseBooks = new ArrayList<>();
 
         //is the list is null, from not assigning anything from the query (repoBook method)

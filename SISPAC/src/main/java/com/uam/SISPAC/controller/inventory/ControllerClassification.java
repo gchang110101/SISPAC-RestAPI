@@ -1,5 +1,6 @@
 package com.uam.SISPAC.controller.inventory;
 
+import com.uam.SISPAC.dto.inventory.ClassificationDto;
 import com.uam.SISPAC.model.inventory.Classification;
 import com.uam.SISPAC.service.inventory.IServiceClassification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/classification")
-@CrossOrigin("*")
+@CrossOrigin("192.*.*.*")
 public class ControllerClassification {
 
     @Qualifier("ServiceClassification")
@@ -25,12 +26,12 @@ public class ControllerClassification {
         return new ResponseEntity<>(classificationList, HttpStatus.OK);
     }
     @PostMapping("/save")
-    public Classification saveClassification(@RequestBody Classification classification) {
+    public Classification saveClassification(@RequestBody ClassificationDto classification) {
         return serviceClassification.save(classification);
     }
     @PutMapping(value = "/update")
-    public Classification updateClassification(@RequestBody Classification classification) throws Exception {
-        if (classification.getId() == null) {
+    public Classification updateClassification(@RequestBody ClassificationDto classification) throws Exception {
+        if (classification.getIdClassification() == null) {
             throw new Exception("Please, send the Id vallue");
         }
         return serviceClassification.save(classification);

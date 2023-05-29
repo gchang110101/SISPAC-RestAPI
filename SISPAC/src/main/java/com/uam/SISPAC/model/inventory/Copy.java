@@ -13,11 +13,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Copy", schema = "Inventory")
+@Table(schema = "inventory")
 public class Copy {
     @Id
     private String id;
-    private int number;
+    private Integer number;
     private String location;
 
     @Enumerated(EnumType.STRING)
@@ -29,4 +29,11 @@ public class Copy {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Book book;
+
+    public Copy(String id, Integer number, String location, CopyStatus copyStatus) {
+        this.id = id;
+        this.number = number;
+        this.location = location;
+        this.copyStatus = copyStatus;
+    }
 }

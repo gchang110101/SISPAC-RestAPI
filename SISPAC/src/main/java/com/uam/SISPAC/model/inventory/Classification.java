@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,13 +11,19 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Classification", schema = "Inventory")
+
+@Table(schema = "inventory")
 public class Classification {
     @Id
     private String id;
     private String name;
-    @OneToMany(mappedBy = "classifications",cascade = CascadeType.ALL
+    @OneToMany(mappedBy = "classification",cascade = CascadeType.ALL
             ,fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Book> books;
 
-    private List<Book> classifications;
+    public Classification(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

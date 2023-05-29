@@ -19,9 +19,13 @@ public interface IRepositoryBook extends JpaRepository<Book, String> {
     @Query("select b from Book b where b.title = :title")
     public Book getBookByTitle(@Param("title") String title);
 
-    @Query("select b from Book b where b.author.name = :authorName")
-    public List<Book> getBookByAuthorId(@Param("authorName") String authorName);
+    @Query("select b from Book b where b.classification.name = :classificationName")
+    public List<Book> getBookByClassification(@Param("classificationName") String classificationName);
 
-    @Query("select b from Book b where b.classifications.name = :classificationName")
-    public List<Book> getBookByClassificationId(@Param("classificationName") String classificationName);
+    @Query("select b from Book b where b.publisher.name = :publisherName")
+    public List<Book> getBookByPublisher(@Param("publisherName") String publisherName);
+
+    @Query("select b from Book b join b.authors a where a.name = :authorName")
+    public List<Book> getBooksByAuthor(@Param("authorName") String authorName);
+
 }

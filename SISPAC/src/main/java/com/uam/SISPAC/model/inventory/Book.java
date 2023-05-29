@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Book", schema = "Inventory")
+@Table(schema = "inventory")
 public class Book {
     @Id
     private String ISBN;
@@ -20,16 +21,24 @@ public class Book {
     private String title;
     private Integer existence;
 
+    /*
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Author author;
+     */
+    @ManyToMany
+    @JoinTable(
+            schema = "inventory",
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    List<Author> authors;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Classification classifications;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Classification classification;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Publisher publisher;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Copy> copy;
@@ -41,4 +50,7 @@ public class Book {
         this.title = title;
         this.existence = existence;
     }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Publisher publisher;
 }

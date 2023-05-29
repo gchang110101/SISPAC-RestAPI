@@ -1,6 +1,7 @@
 package com.uam.SISPAC.controller.humanresources;
 
 import com.uam.SISPAC.dto.humanresources.LoginResponse;
+import com.uam.SISPAC.dto.humanresources.SystemUserDto;
 import com.uam.SISPAC.model.humanresources.SystemUser;
 import com.uam.SISPAC.service.humanresources.IServiceSystemUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @RestController
+@CrossOrigin("192.*.*.*")
 @RequestMapping("/systemuser")
 @CrossOrigin("*")
 public class ControllerSystemUser {
@@ -25,12 +29,12 @@ public class ControllerSystemUser {
     }
 
     @PostMapping("/save")
-    public void save(@RequestBody SystemUser systemUser) {
+    public void save(@RequestBody SystemUserDto systemUser) {
         serviceSystemUser.create(systemUser);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody SystemUser systemUser) throws Exception {
+    public void update(@RequestBody SystemUserDto systemUser) throws Exception {
         if (systemUser.getId().equals(null))
             throw new Exception("No ID value found");
         serviceSystemUser.create(systemUser);
