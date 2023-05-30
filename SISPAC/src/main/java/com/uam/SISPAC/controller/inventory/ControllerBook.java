@@ -23,16 +23,16 @@ public class ControllerBook {
     }
 
     @PostMapping("/save")
-    public Book save(@RequestBody BookDto book) {
-        return service.save(book);
+    public void save(@RequestBody BookDto book) {
+        service.save(book);
     }
 
     @PutMapping(value = "/update")
-    public Book updateBook(@RequestBody BookDto bookDto) throws Exception {
+    public void updateBook(@RequestBody BookDto bookDto) throws Exception {
         if (bookDto.getIdBook() == null) {
             throw new Exception("Please, send the Id value");
         }
-        return service.save(bookDto);
+        service.save(bookDto);
     }
 
     @DeleteMapping(value = "/delete/{id}")

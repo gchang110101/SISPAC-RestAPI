@@ -10,7 +10,7 @@ public interface IServiceBook {
 
     public List<Book> getAll();
 
-    public Book save(BookDto bookDto);
+    public void save(BookDto bookDto);
 
     public void deleteById(String id);
 

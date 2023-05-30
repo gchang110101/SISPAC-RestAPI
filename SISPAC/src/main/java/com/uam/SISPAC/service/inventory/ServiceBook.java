@@ -3,10 +3,9 @@ package com.uam.SISPAC.service.inventory;
 import com.uam.SISPAC.dto.inventory.BookDto;
 import com.uam.SISPAC.model.inventory.Author;
 import com.uam.SISPAC.model.inventory.Book;
-import com.uam.SISPAC.repository.inventory.IRepositoryAuthor;
-import com.uam.SISPAC.repository.inventory.IRepositoryBook;
-import com.uam.SISPAC.repository.inventory.IRepositoryClassification;
-import com.uam.SISPAC.repository.inventory.IRepositoryPublisher;
+import com.uam.SISPAC.model.inventory.Copy;
+import com.uam.SISPAC.model.inventory.CopyStatus;
+import com.uam.SISPAC.repository.inventory.*;
 import lombok.Data;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,9 @@ public class ServiceBook implements IServiceBook{
     @Autowired
     private IRepositoryPublisher repositoryPublisher;
 
+    @Autowired
+    private IRepositoryCopy repositoryCopy;
+
 
     @Override
     public List<Book> getAll() {
@@ -38,7 +40,7 @@ public class ServiceBook implements IServiceBook{
 
     @SneakyThrows
     @Override
-    public Book save(BookDto bookDto) {
+    public void save(BookDto bookDto) {
         Book insertBook = new Book(
                 bookDto.getIdBook(),
                 bookDto.getMFN(),
@@ -75,37 +77,24 @@ public class ServiceBook implements IServiceBook{
 
         insertBook.setPublisher(repositoryPublisher.findById(bookDto.getPublisherId()).get());
 
-        /*
+        repoBook.save(insertBook);
 
-        //attach author through DTO foreign id parameter (if they exist)
-        if(bookDto.getAuthorsId() == null)
-            insertBook.setAuthors(null);
-        else if(!repoAuthor.existsById(bookDto.getAuthorsId().toString()))
-            insertBook.setAuthors(null);
-        else
-            insertBook.setClassification(null);
+        if (insertBook.getExistence() > 0) {
+            int cantCopies =  repositoryCopy.findAll().size();
+            String copy_id;
+            for (int i = 0; i < insertBook.getExistence(); i++) {
+                copy_id =  "C-" + (i + 1 + cantCopies);
+                repositoryCopy.save(new Copy(
+                        copy_id,
+                        i + 1,
+                        null,
+                        CopyStatus.AVAILABLE,
+                        insertBook
+                ));
+            }
+        }
 
-        //attach classification through DTO foreign id parameter (if they exist)
-        if(bookDto.getClassificationId() == null)
-            insertBook.setAuthors(null);
-        else if(!repoClassification.existsById(bookDto.getClassificationId()))
-            insertBook.setClassification(null);
-        else
-            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
 
-        /*
-        if(bookDto.getPublisherId() == null)
-            insertBook.setAuthors(null);
-        else if(!repoClassification.existsById(bookDto.getClassificationId()))
-            insertBook.setClassification(null);
-        else
-            insertBook.setClassification(repoClassification.findById(bookDto.getClassificationId()).get());
-
-        //copy null for now
-        insertBook.setCopy(null);
-        */
-
-        return repoBook.save(insertBook);
     }
 
     @Override

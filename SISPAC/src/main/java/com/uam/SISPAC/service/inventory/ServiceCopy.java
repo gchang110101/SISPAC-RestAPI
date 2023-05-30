@@ -1,7 +1,9 @@
 package com.uam.SISPAC.service.inventory;
 
 import com.uam.SISPAC.dto.inventory.CopyDto;
+import com.uam.SISPAC.model.inventory.Book;
 import com.uam.SISPAC.model.inventory.Copy;
+import com.uam.SISPAC.model.inventory.CopyStatus;
 import com.uam.SISPAC.repository.inventory.IRepositoryBook;
 import com.uam.SISPAC.repository.inventory.IRepositoryCopy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,18 @@ public class ServiceCopy implements IServiceCopy{
     @Override
     public Copy save(CopyDto copyDto) {
         Copy copy = new Copy(
-                copyDto.getId(),
-                copyDto.getNumber(),
+                "C-" + (repositoryCopy.findAll().size() + 1),
+                repositoryCopy.getCopyByBook(copyDto.getBookId()).size() + 1,
                 copyDto.getLocation(),
-                copyDto.getCopyStatus()
+                CopyStatus.AVAILABLE
         );
 
-        copy.setBook(repositoryBook.findById(copyDto.getBookId()).get());
+        Book book = repositoryBook.findById(copyDto.getBookId()).get();
+
+        Integer existence = book.getExistence();
+        book.setExistence(existence + 1);
+        repositoryBook.save(book);
+        copy.setBook(book);
 
         return repositoryCopy.save(copy);
     }
