@@ -36,4 +36,11 @@ public class Copy {
         this.location = location;
         this.copyStatus = copyStatus;
     }
+    public Copy(String id, Integer number, String location, CopyStatus copyStatus, Book book) {
+        this.id = id;
+        this.number = number;
+        this.location = location;
+        this.copyStatus = copyStatus;
+        this.book = book;
+    }
 }
