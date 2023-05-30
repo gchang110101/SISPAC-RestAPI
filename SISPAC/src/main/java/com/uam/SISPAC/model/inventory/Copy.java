@@ -1,5 +1,6 @@
 package com.uam.SISPAC.model.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.uam.SISPAC.model.loans.Loan;
 import jakarta.persistence.*;
@@ -23,6 +24,8 @@ public class Copy {
     @Enumerated(EnumType.STRING)
     private CopyStatus copyStatus;
 
+
+    @JsonIgnore
     @ManyToMany(mappedBy = "copies")
     List<Loan> loans;
 

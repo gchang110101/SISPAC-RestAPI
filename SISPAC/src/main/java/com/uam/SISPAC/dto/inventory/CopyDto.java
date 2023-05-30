@@ -5,12 +5,6 @@ import lombok.Data;
 
 @Data
 public class CopyDto {
-    private String id;
-    private Integer number;
-
     private String location;
-
-    private CopyStatus copyStatus;
-
     private String bookId;
 }
