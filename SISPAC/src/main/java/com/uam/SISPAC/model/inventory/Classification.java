@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Table(schema = "inventory")
+@Table(schema = "Inventory")
 public class Classification {
     @Id
     private String id;

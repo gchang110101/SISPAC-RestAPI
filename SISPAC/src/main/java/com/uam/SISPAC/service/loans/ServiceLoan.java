@@ -33,7 +33,7 @@ public class ServiceLoan implements IServiceLoan{
     public void loanCreate(LoanDto loanDto) {
         Loan loan = new Loan(
                 loanDto.getDateIssued(),
-                loanDto.getDateReturned(),
+                loanDto.getReturnDate(),
                 loanDto.getDateCreated(),
                 loanDto.getId(),
                 loanDto.getLoanStatus()

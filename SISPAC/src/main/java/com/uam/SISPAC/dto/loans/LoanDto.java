@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LoanDto {
     private LocalDate dateIssued;
-    private LocalDate dateReturned;
+    private LocalDate returnDate;
     private LocalDate dateCreated;
     private String id;
     private LoanStatus loanStatus;

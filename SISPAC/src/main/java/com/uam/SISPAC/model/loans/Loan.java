@@ -16,10 +16,10 @@ import java.util.List;
 @Entity(name = "Loan")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(schema = "loans")
+@Table(schema = "Loans")
 public class Loan {
     private LocalDate dateIssued;
-    private LocalDate dateReturned;
+    private LocalDate returnDate;
     private LocalDate dateCreated;
     @Id
     private String id;
@@ -30,7 +30,7 @@ public class Loan {
     @ManyToMany
     @JsonIgnore
     @JoinTable(
-            schema = "loans",
+            schema = "Loans",
             name = "loan_copy",
             joinColumns = @JoinColumn(name = "loan_id"),
             inverseJoinColumns = @JoinColumn(name = "copy_id"))
@@ -40,9 +40,9 @@ public class Loan {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private SystemUser systemUser;
 
-    public Loan(LocalDate dateIssued, LocalDate dateReturned, LocalDate dateCreated, String id, LoanStatus loanStatus) {
+    public Loan(LocalDate dateIssued, LocalDate returnDate, LocalDate dateCreated, String id, LoanStatus loanStatus) {
         this.dateIssued = dateIssued;
-        this.dateReturned = dateReturned;
+        this.returnDate = returnDate;
         this.dateCreated = dateCreated;
         this.id = id;
         this.loanStatus = loanStatus;

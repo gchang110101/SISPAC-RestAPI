@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(schema = "inventory")
+@Table(schema = "Inventory")
 public class Book {
     @Id
     private String ISBN;

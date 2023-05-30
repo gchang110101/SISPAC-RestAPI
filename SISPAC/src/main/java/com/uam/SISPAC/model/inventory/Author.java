@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(schema = "inventory")
+@Table(schema = "Inventory")
 public class Author {
     @Id
     private String id;

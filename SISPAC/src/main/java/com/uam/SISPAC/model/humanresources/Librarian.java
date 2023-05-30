@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @PrimaryKeyJoinColumn(foreignKey = @ForeignKey(name = "fk_librarian_user"))
-@Table(schema = "humanresources")
+@Table(schema = "HumanResources")
 public class Librarian extends SystemUser {
 
     @Enumerated(EnumType.STRING)
