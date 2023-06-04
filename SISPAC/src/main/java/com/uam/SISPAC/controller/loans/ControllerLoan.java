@@ -3,6 +3,7 @@ package com.uam.SISPAC.controller.loans;
 
 import com.uam.SISPAC.dto.loans.LoanDto;
 import com.uam.SISPAC.model.loans.Loan;
+import com.uam.SISPAC.repository.loans.IRepositoryLoan;
 import com.uam.SISPAC.service.loans.IServiceLoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,10 +29,7 @@ public class ControllerLoan {
         serviceLoan.loanCreate(loan);
     }
     @PutMapping(value = "/update")
-    public void loanUpdate(@RequestBody LoanDto loan) throws Exception {
-        if (loan.getId() == null) {
-            throw new Exception("Por favor, envía id");
-        }
+    public void loanUpdate(@RequestBody LoanDto loan) {
         serviceLoan.loanCreate(loan);
     }
     @DeleteMapping(value = "/delete/{id}")

@@ -12,9 +12,9 @@ import java.util.List;
 public class LoanDto {
     private LocalDate dateIssued;
     private LocalDate returnDate;
-    private LocalDate dateCreated;
-    private String id;
-    private LoanStatus loanStatus;
+    //private LocalDate dateCreated;
+    //private String id;
+    //private LoanStatus loanStatus;
     private String username;
-    private List<String> copies;
+    private List<String> bookISBNList;
 }
