@@ -29,7 +29,7 @@ public class Loan {
     private LoanStatus loanStatus;
 
     @ManyToMany
-    @JsonIgnore
+    //@JsonIgnore
     @JoinTable(
             schema = "Loans",
             name = "loan_copy",

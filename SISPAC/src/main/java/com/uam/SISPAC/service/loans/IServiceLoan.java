@@ -15,4 +15,15 @@ public interface IServiceLoan {
 
     public List<Loan> checkLoans();
 
+    void loanEnd(String id);
+
+    List<Loan> getByUser(String user);
+
+    List<Loan> getByNames(String names);
+
+    List<Loan> getByLastNames(String last_names);
+
+    List<Loan> getByBook(String book_isbn);
+
+    List<Loan> getByCopy(String copy_id);
 }

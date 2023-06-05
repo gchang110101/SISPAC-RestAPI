@@ -123,4 +123,51 @@ public class ServiceLoan implements IServiceLoan{
     public List<Loan> checkLoans() {
         return repoLoan.findAll();
     }
+
+    @Override
+    @SneakyThrows
+    public void loanEnd(String id) {
+
+        if (!repoLoan.existsById(id))
+            throw new Exception("no existe el préstamo");
+
+        Loan findLoan = repoLoan.findById(id).get();
+
+        if (findLoan.getLoanStatus() == LoanStatus.DONELATE
+                || findLoan.getLoanStatus() == LoanStatus.DONEONTIME)
+            throw new Exception("el préstamo ya está finalizado");
+
+        if (findLoan.getLoanStatus() == LoanStatus.ONTIME)
+            findLoan.setLoanStatus(LoanStatus.DONEONTIME);
+        else
+            findLoan.setLoanStatus(LoanStatus.DONELATE);
+
+        repoLoan.save(findLoan);
+    }
+
+    @Override
+    @SneakyThrows
+    public List<Loan> getByUser(String user) {
+        return repoLoan.getLoansByUser(user);
+    }
+
+    @Override
+    public List<Loan> getByNames(String names) {
+        return repoLoan.getLoansByNames(names);
+    }
+
+    @Override
+    public List<Loan> getByLastNames(String last_names) {
+        return repoLoan.getLoansByLastNames(last_names);
+    }
+
+    @Override
+    public List<Loan> getByBook(String book_isbn) {
+        return repoLoan.getLoansByBook(book_isbn);
+    }
+
+    @Override
+    public List<Loan> getByCopy(String copy_id) {
+        return repoLoan.getLoansByCopy(copy_id);
+    }
 }
