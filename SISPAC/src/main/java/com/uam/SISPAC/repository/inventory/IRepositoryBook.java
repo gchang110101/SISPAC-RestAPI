@@ -17,7 +17,7 @@ public interface IRepositoryBook extends JpaRepository<Book, String> {
     public Book getBookByMFN(@Param("mfn") String mfn);
 
     @Query("select b from Book b where b.title = :title")
-    public Book getBookByTitle(@Param("title") String title);
+    public List<Book> getBookByTitle(@Param("title") String title);
 
     @Query("select b from Book b where b.classification.name = :classificationName")
     public List<Book> getBookByClassification(@Param("classificationName") String classificationName);

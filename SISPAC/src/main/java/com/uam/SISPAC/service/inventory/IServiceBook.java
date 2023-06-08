@@ -18,7 +18,7 @@ public interface IServiceBook {
 
     public Book getOneByMFN(String mfn);
 
-    public Book getOneByTitle(String title);
+    public List<Book> getManyByTitle(String title);
 
     public List<Book> getManyByAuthor(String authorName);
 

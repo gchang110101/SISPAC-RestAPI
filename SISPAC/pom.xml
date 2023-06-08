@@ -14,7 +14,7 @@
 	<name>SISPAC</name>
 	<description>Proyecto grupal POO II - Sistema de Gestión de Préstamos de Biblioteca - SISPAC</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

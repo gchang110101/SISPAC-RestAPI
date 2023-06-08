@@ -2,6 +2,7 @@ package com.uam.SISPAC.service.loans;
 
 import com.uam.SISPAC.dto.loans.LoanDto;
 import com.uam.SISPAC.model.inventory.Copy;
+import com.uam.SISPAC.model.inventory.CopyStatus;
 import com.uam.SISPAC.model.loans.Loan;
 import com.uam.SISPAC.model.loans.LoanStatus;
 import com.uam.SISPAC.repository.humanresources.IRepositorySystemUser;
@@ -128,19 +129,39 @@ public class ServiceLoan implements IServiceLoan{
     @SneakyThrows
     public void loanEnd(String id) {
 
+        //que si existe el loan
         if (!repoLoan.existsById(id))
             throw new Exception("no existe el préstamo");
 
+        //atacha
         Loan findLoan = repoLoan.findById(id).get();
 
+        //excepcion que si ya terminó
         if (findLoan.getLoanStatus() == LoanStatus.DONELATE
                 || findLoan.getLoanStatus() == LoanStatus.DONEONTIME)
             throw new Exception("el préstamo ya está finalizado");
 
-        if (findLoan.getLoanStatus() == LoanStatus.ONTIME)
+        //condiciones de estado
+        if (findLoan.getLoanStatus() == LoanStatus.ONTIME)  //en tiempo
             findLoan.setLoanStatus(LoanStatus.DONEONTIME);
-        else
+        else                                                //tarde
             findLoan.setLoanStatus(LoanStatus.DONELATE);
+
+        //copies a actualizar
+        List<Copy> loanCopies = new ArrayList<>();
+
+        //encontrar copias y atachar
+        for (Copy copy : findLoan.getCopies()) {
+            loanCopies.add(
+                    repositoryCopy.findById(copy.getId()).get()
+            );
+        }
+
+        //atualizar copias
+        for(Copy nCopy : loanCopies) {
+            nCopy.setCopyStatus(CopyStatus.AVAILABLE);
+            repositoryCopy.save(nCopy); //se sobre escribe
+        }
 
         repoLoan.save(findLoan);
     }

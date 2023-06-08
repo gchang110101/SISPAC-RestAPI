@@ -17,6 +17,8 @@ public interface IRepositoryCopy extends JpaRepository<Copy, String> {
             "select top(1) id from [Inventory].[Copy]" +
                     " inner join Inventory.Book on book_ISBN = ISBN " +
                     "where book_ISBN = :isbn and copyStatus = 'AVAILABLE'"
+            /*"select id from Inventory.Copy inner join Inventory.Book on book_ISBN = ISBN " +
+                    "where book_ISBN = :isbn and copyStatus = 'AVAILABLE' limit 1"*/
             , nativeQuery = true)   //lets you use your database engine's native dialect
     public String getAvailableCopyID(@Param ("isbn") String isbn);
 }

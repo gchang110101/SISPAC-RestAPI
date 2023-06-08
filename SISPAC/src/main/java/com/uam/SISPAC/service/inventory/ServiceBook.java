@@ -125,14 +125,15 @@ public class ServiceBook implements IServiceBook{
     }
 
     @Override
-    public Book getOneByTitle(String title) {
-        Book requestBook = repoBook.getBookByTitle(title);
-        Book responseBook = new Book();
+    public List<Book> getManyByTitle(String title) {
+        List<Book> requestBooks = repoBook.getBookByTitle(title);
+        List<Book> responseBooks = new ArrayList<>();
 
-        if(requestBook != null)
-            responseBook = requestBook;
+        //is the list is null, from not assigning anything from the query (repoBook method)
+        if(requestBooks != null)
+            responseBooks = requestBooks;
 
-        return responseBook;
+        return responseBooks;
     }
 
     @Override

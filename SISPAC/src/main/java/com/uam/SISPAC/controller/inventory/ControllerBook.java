@@ -45,9 +45,9 @@ public class ControllerBook {
         return service.getOneByISBN(isbn);
     }
 
-    @GetMapping("/one/bytitle/{title}")
-    public Book getByTitle(@PathVariable String title) {
-        return service.getOneByTitle(title);
+    @GetMapping("/many/bytitle/{title}")
+    public List<Book> getByTitle(@PathVariable String title) {
+        return service.getManyByTitle(title);
     }
 
     @GetMapping("/one/bymfn/{mfn}")
